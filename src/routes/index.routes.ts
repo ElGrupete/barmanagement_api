@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import Dummy from './dummy/dummy.routes';
 
 const router: Router = Router();

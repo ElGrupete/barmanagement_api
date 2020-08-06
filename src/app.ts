@@ -3,7 +3,6 @@ import * as bodyParser from "body-parser";
 import routes from "./routes/index.routes";
 import cors from "cors";
 
-// -- App Class -- //
 // -- This Class is the Express APP -- //
 // -- This is used throughout the application -- //
 
@@ -27,7 +26,7 @@ class App {
     // -- Support application/x-www-form-urlencoded post data -- //
         this.app.use(bodyParser.urlencoded({extended: false}));
 
-    // -- Add routes -- //
+    // -- Add all the existing routes -- //
         this.app.use("/api/v1", routes);
     }
 }
