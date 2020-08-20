@@ -29,6 +29,12 @@ export class User {
             }
         });
 
+        schema.methods.toJSON = function () {
+            let obj = this.toObject();
+            delete obj.password;
+            return obj;
+        }
+
         // This statment adds a plugin to the schema so that the unique fields don't repeat themselfs //
         schema.plugin(mongooseUniqueValidator);
 
