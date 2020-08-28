@@ -49,7 +49,6 @@ router.post('/', (req: Request, res: Response) => {
                 .json({
                     Ok: true,
                     Result: {
-                        user,
                         token
                     }
                 }); 
