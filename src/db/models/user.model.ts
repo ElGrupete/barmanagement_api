@@ -29,6 +29,7 @@ export class User {
             }
         });
 
+        // This deletes the password in the response object //
         schema.methods.toJSON = function () {
             let obj = this.toObject();
             delete obj.password;
