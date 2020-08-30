@@ -28,6 +28,31 @@ router.get('/', (req: Request, res: Response) => {
     });
 });
 
+// GET ONE //
+router.get('/:id', (req: Request, res: Response) => {
+    DB.Models.Role.find({}, (err, roles) => {
+        if (err) {
+            return res.status(500).json({
+                Ok: false,
+                Message: err 
+            });
+        }
+
+        if (roles.length == 0) {
+            return res.status(200).json({
+                Ok: true,
+                Message: 'No se encontraron resultados',
+                Result: roles
+            });
+        }
+
+        res.status(200).json({
+            Ok: true,
+            Result: roles
+        });
+    });
+});
+
 // POST //
 router.post('/', (req: Request, res: Response) => {
 
