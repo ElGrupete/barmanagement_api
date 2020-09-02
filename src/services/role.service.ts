@@ -99,3 +99,32 @@ export const updateRole = (req: Request, res: Response) => {
         });
     });
 }
+
+export const deleteRole = (req: Request, res: Response) => {
+
+    let _id = req.body.id;
+
+    DB.Models.Role.deleteOne({_id}, (err) => {
+        if (err) {
+            return res
+                    .status(500)
+                    .json({
+                        Ok: false,
+                        Error: err,
+                        Message: 'No se pudo actualizar el usuario'
+                    });
+        }
+        if (!_id) {
+            return res
+                    .status(404)
+                    .json({
+                        Ok: false,
+                        Message: 'Id no proporcionado'
+                    });
+        }
+        
+        res.json({
+            Ok: true,
+        });
+    });
+}

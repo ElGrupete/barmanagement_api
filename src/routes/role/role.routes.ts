@@ -14,4 +14,7 @@ router.post('/', services.createRole);
 // PUT //
 router.put('/', services.updateRole);
 
+// DELETE //
+router.delete('/', services.deleteRole);
+
 export default router;
