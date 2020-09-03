@@ -24,7 +24,7 @@ export const createUser = (req: Request, res: Response) => {
 
         res.status(200).json({
             Ok: true,
-            Result: user.userName
+            Result: { user }
         });
     });
 }

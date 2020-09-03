@@ -15,13 +15,14 @@ export const getRoles = (req: Request, res: Response) => {
             return res.status(200).json({
                 Ok: true,
                 Message: 'No se encontraron resultados',
-                Result: roles
             });
         }
 
         res.status(200).json({
             Ok: true,
-            Result: roles
+            Result: {
+                roles
+            }
         });
     });
 }
