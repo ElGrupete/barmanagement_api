@@ -13,11 +13,6 @@ export class User {
      */
     constructor() {
         const schema = new Schema({
-            roleId: {
-                type: Schema.Types.ObjectId,
-                ref: 'Role',
-                required: true
-            },
             userName: {
                 type: String,
                 required: true,
@@ -26,6 +21,11 @@ export class User {
             password: {
                 type: String,
                 required: true,
+            },
+            role: {
+                type: Schema.Types.ObjectId,
+                ref: 'Role',
+                required: true
             }
         });
 
