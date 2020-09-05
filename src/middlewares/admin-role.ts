@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import * as jwt from "jsonwebtoken";
 import { SECRET } from '../config/config';
+import { IRole } from '../db/interfaces/role.interface';
 
 let verifyAdminRole = (req: Request, res: Response, next: NextFunction) => {
     let token = req.get('Authorization');
@@ -12,9 +13,23 @@ let verifyAdminRole = (req: Request, res: Response, next: NextFunction) => {
                     Ok: false,
                     Message: '¡Error! Token no proporcionado.'
                 });
-                
-    jwt.verify(token, SECRET, (err, payload) => {
+    // Here it uses a try/catch stmt because of the non-asyncronous approach //
+    try {
+        // The decoded variable is set as type any so that the role property can be accessed //
+        let decoded: any = jwt.verify(token, SECRET);
+        // If the admin property in the role object is true, call next();
+        if (decoded.role.admin) {
+            next();
+        } else {
+            return res
+            .status(401)
+            .json({
+                Ok: false,
+                Message: '¡Error! No posee rol de administrador.'
+            });
+        }
 
+    } catch (err) {
         if (err) {
             return res
                     .status(401)
@@ -23,11 +38,7 @@ let verifyAdminRole = (req: Request, res: Response, next: NextFunction) => {
                         Error: err
                     });
         }
-
-        if (payload) {
-
-        }
-    });
+    }         
 }
 
 export default verifyAdminRole;
