@@ -12,7 +12,7 @@ router.get('/:id', services.getRoleById);
 router.post('/', services.createRole);
 
 // PUT //
-router.put('/', services.updateRole);
+router.put('/:id', services.updateRole);
 
 // DELETE //
 router.delete('/', services.deleteRole);

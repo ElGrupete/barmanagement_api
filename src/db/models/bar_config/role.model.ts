@@ -1,5 +1,5 @@
 import { Model, Schema, model } from "mongoose";
-import { IRole } from "../interfaces/role.interface";
+import { IRole } from "../../interfaces/bar_config/role.interface";
 import mongooseUniqueValidator from 'mongoose-unique-validator';
 
 export interface RoleModel extends Model<IRole> {};
