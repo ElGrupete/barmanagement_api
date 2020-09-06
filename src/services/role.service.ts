@@ -73,10 +73,10 @@ export const createRole = (req: Request, res: Response) => {
 
 export const updateRole = (req: Request, res: Response) => {
 
-    let _id = req.body.id;
+    let id = req.params.id;
     let updatedRole = req.body
 
-    DB.Models.Role.updateOne({_id}, updatedRole, (err, role) => {
+    DB.Models.Role.updateOne({id}, updatedRole, (err, role) => {
         if (err) {
             return res
                     .status(500)
@@ -86,7 +86,7 @@ export const updateRole = (req: Request, res: Response) => {
                         Message: 'No se pudo actualizar el usuario'
                     });
         }
-        if (!_id) {
+        if (!id) {
             return res
                     .status(404)
                     .json({
@@ -103,9 +103,9 @@ export const updateRole = (req: Request, res: Response) => {
 
 export const deleteRole = (req: Request, res: Response) => {
 
-    let _id = req.body.id;
+    let id = req.body.id;
 
-    DB.Models.Role.deleteOne({_id}, (err) => {
+    DB.Models.Role.deleteOne({id}, (err) => {
         if (err) {
             return res
                     .status(500)
@@ -115,7 +115,7 @@ export const deleteRole = (req: Request, res: Response) => {
                         Message: 'No se pudo actualizar el usuario'
                     });
         }
-        if (!_id) {
+        if (!id) {
             return res
                     .status(404)
                     .json({

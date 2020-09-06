@@ -1,5 +1,5 @@
 import { Model, Schema, model } from "mongoose";
-import { IUser } from "../interfaces/user.interface";
+import { IUser } from "../../interfaces/bar_config/user.interface";
 import  mongooseUniqueValidator  from 'mongoose-unique-validator';
 
 export interface UserModel extends Model<IUser> {};

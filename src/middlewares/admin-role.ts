@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import * as jwt from "jsonwebtoken";
 import { SECRET } from '../config/config';
-import { IRole } from '../db/interfaces/role.interface';
+import { IRole } from '../db/interfaces/bar_config/role.interface';
 
 let verifyAdminRole = (req: Request, res: Response, next: NextFunction) => {
     let token = req.get('Authorization');
