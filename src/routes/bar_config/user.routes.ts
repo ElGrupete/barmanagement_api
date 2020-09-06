@@ -1,4 +1,4 @@
-import * as services from './../../services/user.service';
+import * as services from '../../services/user.service';
 import express = require("express");
 import verifyToken from "../../middlewares/authorization";
 import verifyAdminRole from '../../middlewares/admin-role';

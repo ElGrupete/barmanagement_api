@@ -1,5 +1,5 @@
 import express = require("express");
-import * as services from '../../services/login.service';
+import * as services from '../services/login.service';
 const router = express.Router();
 
 // POST //

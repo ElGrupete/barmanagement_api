@@ -1,4 +1,4 @@
-import * as services from './../../services/role.service';
+import * as services from '../../services/role.service';
 import express = require("express");
 const router = express.Router();
 

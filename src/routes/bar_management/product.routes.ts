@@ -1,4 +1,4 @@
-import { createProduct, getAllProducts, getProductById, updateProduct } from './../../services/product.service';
+import { createProduct, getAllProducts, getProductById, updateProduct } from '../../services/product.service';
 import express = require("express");
 import verifyToken from '../../middlewares/authorization';
 import verifyAdminRole from '../../middlewares/admin-role';
