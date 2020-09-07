@@ -1,4 +1,4 @@
-import * as service from '../../services/user.service';
+import * as service from '../../services/bar_config/user.service';
 import express = require("express");
 import verifyToken from "../../middlewares/authorization";
 import verifyAdminRole from '../../middlewares/admin-role';

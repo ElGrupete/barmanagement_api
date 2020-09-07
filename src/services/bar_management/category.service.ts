@@ -1,6 +1,6 @@
 import express = require("express");
 import { Request, Response } from "express";
-import { DB } from "../db/db";
+import { DB } from "../../db/db";
 
 export const createCategory = async (req: Request, res: Response) => {
 

@@ -1,4 +1,4 @@
-import * as service from '../../services/category.service';
+import * as service from '../../services/bar_management/category.service';
 import express = require("express");
 import verifyToken from '../../middlewares/authorization';
 import verifyAdminRole from '../../middlewares/admin-role';
