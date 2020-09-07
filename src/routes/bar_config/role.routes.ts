@@ -1,20 +1,20 @@
-import * as services from '../../services/role.service';
+import * as service from '../../services/role.service';
 import express = require("express");
 const router = express.Router();
 
 // GET ALL //
-router.get('/', services.getRoles);
+router.get('/', service.getRoles);
 
 // GET ONE //
-router.get('/:id', services.getRoleById);
+router.get('/:id', service.getRoleById);
 
 // POST //
-router.post('/', services.createRole);
+router.post('/', service.createRole);
 
 // PUT //
-router.put('/:id', services.updateRole);
+router.put('/:id', service.updateRole);
 
 // DELETE //
-router.delete('/', services.deleteRole);
+router.delete('/', service.deleteRole);
 
 export default router;
