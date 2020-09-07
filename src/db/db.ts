@@ -10,10 +10,10 @@ import { UserModel, User } from './models/bar_config/user.model';
 
 declare interface IModels {
     Category: CategoryModel;
-    Dummy: DummyModel,
-    Role: RoleModel,
-    User: UserModel,
-    Product: ProductModel
+    Dummy: DummyModel;
+    Role: RoleModel;
+    User: UserModel;
+    Product: ProductModel;
 }
 
 
