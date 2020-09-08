@@ -1,3 +1,4 @@
+import { Status, StatusModel } from './models/bar_management/status.model';
 import { Category, CategoryModel } from './models/bar_management/category.model';
 import { Product, ProductModel } from './models/bar_management/product.model';
 import { MONGO_URI } from './../config/config';
@@ -14,6 +15,7 @@ declare interface IModels {
     Role: RoleModel;
     User: UserModel;
     Product: ProductModel;
+    Status: StatusModel;
 }
 
 
@@ -34,7 +36,8 @@ export class DB {
             Role: new Role().model,
             User: new User().model,
             Product: new Product().model,
-            Category: new Category().model
+            Category: new Category().model,
+            Status: new Status().model
         }
     }
 
