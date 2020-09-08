@@ -6,6 +6,7 @@ import { connect, connection, Connection } from 'mongoose';
 import { Dummy, DummyModel } from './models/dummy.model';
 import { RoleModel, Role } from './models/bar_config/role.model';
 import { UserModel, User } from './models/bar_config/user.model';
+import { Menu, MenuModel } from './models/bar_management/menu.model';
 
 // -- Here you should put all the MODELS that the DB is gonna work with -- //
 
@@ -15,6 +16,7 @@ declare interface IModels {
     Role: RoleModel;
     User: UserModel;
     Product: ProductModel;
+    Menu: MenuModel;
     Status: StatusModel;
 }
 
@@ -37,6 +39,7 @@ export class DB {
             User: new User().model,
             Product: new Product().model,
             Category: new Category().model,
+            Menu: new Menu().model,
             Status: new Status().model
         }
     }
