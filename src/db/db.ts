@@ -1,3 +1,4 @@
+import { Category, CategoryModel } from './models/bar_management/category.model';
 import { Product, ProductModel } from './models/bar_management/product.model';
 import { MONGO_URI } from './../config/config';
 import { connect, connection, Connection } from 'mongoose';
@@ -8,10 +9,11 @@ import { UserModel, User } from './models/bar_config/user.model';
 // -- Here you should put all the MODELS that the DB is gonna work with -- //
 
 declare interface IModels {
-    Dummy: DummyModel,
-    Role: RoleModel,
-    User: UserModel,
-    Product: ProductModel
+    Category: CategoryModel;
+    Dummy: DummyModel;
+    Role: RoleModel;
+    User: UserModel;
+    Product: ProductModel;
 }
 
 
@@ -31,7 +33,8 @@ export class DB {
             Dummy: new Dummy().model,
             Role: new Role().model,
             User: new User().model,
-            Product: new Product().model
+            Product: new Product().model,
+            Category: new Category().model
         }
     }
 

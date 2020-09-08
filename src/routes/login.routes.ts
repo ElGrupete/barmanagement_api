@@ -1,8 +1,8 @@
 import express = require("express");
-import * as services from '../../services/login.service';
+import * as service from '../services/login.service';
 const router = express.Router();
 
 // POST //
-router.post('/', services.login);
+router.post('/', service.login);
 
 export default router;

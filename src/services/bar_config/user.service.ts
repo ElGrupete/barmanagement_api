@@ -1,7 +1,7 @@
 import express = require("express");
 import { Request, Response } from "express";
 import * as bcryptjs from 'bcryptjs';
-import { DB } from "../db/db";
+import { DB } from "../../db/db";
 
 
 // POST //
