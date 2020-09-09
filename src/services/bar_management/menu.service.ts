@@ -4,15 +4,12 @@ import { DB } from "../../db/db";
 
 export const createMenu = async (req: Request, res: Response) => {
 
-    let productIds = req.body.productId.split(",");
-
     let menu = new DB.Models.Menu({
         name: req.body.name,
         description: req.body.description,
         categoryId: req.body.categoryId,
         notes: req.body.notes,
         image: req.body.image,
-        productId: productIds,
         statusId: req.body.statusId,
         printed: req.body.printed
     });
@@ -26,30 +23,42 @@ export const createMenu = async (req: Request, res: Response) => {
             });
         }
 
-        res.status(200).json({
-            Ok: true,
-            Result: { menu }
-        });
     });
+    
+    let updated = DB.Models.Menu.updateOne({ _id: menu._id }, 
+        { $addToSet: { productId: { $each: req.body.productId } }}, 
+        { safe: true, upsert: true },
+        (err) => {
+          if (err) {
+              return res.status(500).json({
+                  Ok: false,
+                  Message: err
+              });
+          }
 
+          res.json({
+              Ok: true,
+              Result: { menu }
+          });
 
-    // DB.Models.Menu.update(menu, {$push: { productId: {
-    //     $each: [productIds]
-    // }  }},{safe: true, upsert: true}, (err, menu) => {
-    //     if(err){
-    //         return res.status(500).json({
-    //             Ok: false,
-    //             Message: err
-    //         });
-    //     }
+        
+    });
+    // DB.Models.Menu.update({ _id: menu._id }, 
+    //                       { $push: { productId: { $each: req.body.productId } }}, 
+    //                       { upsert: true, new: true }, (err, menu) => {
+    //                         if (err) {
+    //                             return res.status(500).json({
+    //                                 Ok: false,
+    //                                 Message: err
+    //                             });
+    //                         }
 
-    //     res.json({
-    //         Ok: true,
-    //         Result: {menu}
-    //     })
+    //                         res.json({
+    //                             Ok: true,
+    //                             Result: { menu }
+    //                         });
     // });
 
-    
 }
 
 export const getAllMenus = (req: Request, res: Response) => {
