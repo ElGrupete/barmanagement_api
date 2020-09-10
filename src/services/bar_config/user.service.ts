@@ -8,7 +8,7 @@ import { DB } from "../../db/db";
 export const createUser = async (req: Request, res: Response) => {
 
     let user = new DB.Models.User({
-        userId: req.body.userId,
+        roleId: req.body.roleId,
         userName: req.body.userName,
         password: bcryptjs.hashSync(req.body.password, 10)
     });

@@ -6,7 +6,10 @@ export const createCombo = async (req: Request, res: Response) => {
 
     let combo = new DB.Models.Combo({
         name: req.body.name,
-        description: req.body.description
+        description: req.body.description,
+        menuId: req.body.menuId,
+        expirationDate: req.body.expirationDate,
+        image: req.body.image
     });
 
     await combo.save((err, combo) => {
@@ -101,4 +104,33 @@ export const updateCombo = (req: Request, res: Response) => {
                 Result: { updatedCombo }
             });
         });
+}
+
+export const deleteCombo = (req: Request, res: Response) => {
+
+    let id = req.params.id;
+
+    DB.Models.Combo.deleteOne({_id: id}, (err) => {
+        if (err) {
+            return res
+                    .status(500)
+                    .json({
+                        Ok: false,
+                        Error: err,
+                        Message: 'No se pudo actualizar el combo'
+                    });
+        }
+        if (!id) {
+            return res
+                    .status(404)
+                    .json({
+                        Ok: false,
+                        Message: 'Id no proporcionado'
+                    });
+        }
+        
+        res.json({
+            Ok: true,
+        });
+    });
 }

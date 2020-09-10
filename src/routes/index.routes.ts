@@ -7,6 +7,7 @@ import Product from './bar_management/product.routes';
 import Category from './bar_management/category.routes';
 import Menu from './bar_management/menu.routes';
 import Status from './bar_management/status.routes';
+import Combo from './bar_management/combo.routes';
 
 const router: Router = Router();
 
@@ -18,5 +19,6 @@ router.use('/product', Product);
 router.use('/category', Category);
 router.use('/menu', Menu);
 router.use('/status', Status);
+router.use('/combo', Combo);
 
 export default router;
