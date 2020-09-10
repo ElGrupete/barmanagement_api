@@ -1,13 +1,13 @@
 import { Schema, model } from 'mongoose';
 import { Model } from 'mongoose';
-import { IMenu } from '../../interfaces/bar_management/menu.interface';
+import { ICombo } from '../../interfaces/bar_management/combo.interface';
 import mongooseUniqueValidator from 'mongoose-unique-validator';
 
-export interface MenuModel extends Model<IMenu> {};
+export interface ComboModel extends Model<ICombo> {};
 
-export class Menu {
+export class Combo {
 
-    private _model: Model<IMenu>;
+    private _model: Model<ICombo>;
 
     /**
      *
@@ -22,48 +22,31 @@ export class Menu {
             description: {
                 type: String
             },
-            categoryId: {
+            menuId: {
                 type: String,
                 required: true
             },
-            productId: {
-                type: [String],
-            },
-            notes: {
-                type: String
+            expirationDate: {
+                type: Date
             },
             image: {
                 type: String
-            },
-            statusId: {
-                type: String
-            },
-            printed: {
-                type: Boolean
             }
-
         });
 
-        schema.virtual('products', {
-            ref: 'Product',
-            localField: 'productId',
+        schema.virtual('menus', {
+            ref: 'Menu',
+            localField: 'menuId',
             foreignField: '_id'
-        })
-
-        schema.virtual('status', {
-            ref: 'Status',
-            localField: 'statusId',
-            foreignField: '_id',
-            justOne: true
         })
         
         // This statment adds a plugin to the schema so that the unique fields don't repeat themselfs //
         schema.plugin(mongooseUniqueValidator);
 
-        this._model = model<IMenu>('Menu', schema);
+        this._model = model<ICombo>('Combo', schema);
     }
 
-    get model(): Model<IMenu> {
+    get model(): Model<ICombo> {
         return this._model;
     }
 }
