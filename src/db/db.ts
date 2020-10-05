@@ -8,6 +8,8 @@ import { RoleModel, Role } from './models/bar_config/role.model';
 import { UserModel, User } from './models/bar_config/user.model';
 import { Menu, MenuModel } from './models/bar_management/menu.model';
 import { Combo, ComboModel } from './models/bar_management/combo.model';
+import { Sector, SectorModel } from './models/bar_config/sector.model';
+import { Shift, ShiftModel } from './models/bar_config/shift.model';
 
 // -- Here you should put all the MODELS that the DB is gonna work with -- //
 
@@ -20,6 +22,8 @@ declare interface IModels {
     Menu: MenuModel;
     Status: StatusModel;
     Combo: ComboModel;
+    Sector: SectorModel;
+    Shift: ShiftModel;
 }
 
 
@@ -43,7 +47,9 @@ export class DB {
             Category: new Category().model,
             Menu: new Menu().model,
             Status: new Status().model,
-            Combo: new Combo().model
+            Combo: new Combo().model,
+            Sector: new Sector().model,
+            Shift: new Shift().model
         }
     }
 
