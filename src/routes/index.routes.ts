@@ -9,6 +9,7 @@ import Menu from './bar_management/menu.routes';
 import Status from './bar_management/status.routes';
 import Combo from './bar_management/combo.routes';
 import Sector from './bar_config/sector.routes';
+import Shift from './bar_config/shift.routes';
 
 const router: Router = Router();
 
@@ -22,5 +23,6 @@ router.use('/menu', Menu);
 router.use('/status', Status);
 router.use('/combo', Combo);
 router.use('/sector', Sector);
+router.use('/shift', Shift);
 
 export default router;
