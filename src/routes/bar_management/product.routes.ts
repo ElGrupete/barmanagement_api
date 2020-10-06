@@ -8,5 +8,6 @@ router.post('/', [verifyToken, verifyAdminRole], service.createProduct);
 router.get('/', [verifyToken, verifyAdminRole], service.getAllProducts);
 router.get('/:id', [verifyToken, verifyAdminRole], service.getProductById);
 router.put('/:id', [verifyToken, verifyAdminRole], service.updateProduct);
+router.delete('/:id', [verifyToken, verifyAdminRole], service.deleteProduct);
 
 export default router;

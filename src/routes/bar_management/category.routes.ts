@@ -8,5 +8,6 @@ router.post('/', [verifyToken, verifyAdminRole], service.createCategory);
 router.get('/', [verifyToken, verifyAdminRole], service.getAllCategories);
 router.get('/:id', [verifyToken, verifyAdminRole], service.getCategoryById);
 router.put('/:id', [verifyToken, verifyAdminRole], service.updateCategory);
+router.delete('/:id', [verifyToken, verifyAdminRole], service.deleteCategory);
 
 export default router;

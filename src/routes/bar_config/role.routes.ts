@@ -15,6 +15,6 @@ router.post('/', service.createRole);
 router.put('/:id', service.updateRole);
 
 // DELETE //
-router.delete('/', service.deleteRole);
+router.delete('/:id', service.deleteRole);
 
 export default router;

@@ -102,3 +102,32 @@ export const updateProduct = (req: Request, res: Response) => {
             });
         });
 }
+
+export const deleteProduct = (req: Request, res: Response) => {
+
+    let id = req.params.id;
+
+    DB.Models.Product.deleteOne({_id: id}, (err) => {
+        if (err) {
+            return res
+                    .status(500)
+                    .json({
+                        Ok: false,
+                        Error: err,
+                        Message: 'No se pudo actualizar el producto'
+                    });
+        }
+        if (!id) {
+            return res
+                    .status(404)
+                    .json({
+                        Ok: false,
+                        Message: 'Id no proporcionado'
+                    });
+        }
+        
+        res.json({
+            Ok: true,
+        });
+    });
+}

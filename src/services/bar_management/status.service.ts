@@ -113,7 +113,7 @@ export const deleteStatus = (req: Request, res: Response) => {
                     .json({
                         Ok: false,
                         Error: err,
-                        Message: 'No se pudo actualizar el status'
+                        Message: 'No se pudo actualizar el estado'
                     });
         }
         if (!id) {
