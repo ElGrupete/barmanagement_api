@@ -77,9 +77,9 @@ export const getUserById = (req: Request, res: Response) => {
 
 export const deleteUser = (req: Request, res: Response) => {
 
-    let id = req.body.id;
+    let id = req.params.id;
 
-    DB.Models.User.deleteOne({id}, (err) => {
+    DB.Models.User.deleteOne({_id: id}, (err) => {
         if (err) {
             return res
                     .status(500)

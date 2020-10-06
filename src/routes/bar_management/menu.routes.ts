@@ -8,5 +8,6 @@ router.post('/', [verifyToken, verifyAdminRole], service.createMenu);
 router.get('/', [verifyToken, verifyAdminRole], service.getAllMenus);
 router.get('/:id', [verifyToken, verifyAdminRole], service.getMenuById);
 router.put('/:id', [verifyToken, verifyAdminRole], service.updateMenu);
+router.delete('/:id', [verifyToken, verifyAdminRole], service.deleteMenu);
 
 export default router;

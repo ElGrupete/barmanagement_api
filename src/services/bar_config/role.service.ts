@@ -103,16 +103,16 @@ export const updateRole = (req: Request, res: Response) => {
 
 export const deleteRole = (req: Request, res: Response) => {
 
-    let id = req.body.id;
+    let id = req.params.id;
 
-    DB.Models.Role.deleteOne({id}, (err) => {
+    DB.Models.Role.deleteOne({_id: id}, (err) => {
         if (err) {
             return res
                     .status(500)
                     .json({
                         Ok: false,
                         Error: err,
-                        Message: 'No se pudo actualizar el usuario'
+                        Message: 'No se pudo actualizar el rol'
                     });
         }
         if (!id) {

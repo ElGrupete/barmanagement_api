@@ -105,14 +105,14 @@ export const deleteShift = (req: Request, res: Response) => {
 
     let id = req.params.id;
 
-    DB.Models.Shift.deleteOne({id}, (err) => {
+    DB.Models.Shift.deleteOne({_id: id}, (err) => {
         if (err) {
             return res
                     .status(500)
                     .json({
                         Ok: false,
                         Error: err,
-                        Message: 'No se pudo actualizar el shift'
+                        Message: 'No se pudo actualizar el turno'
                     });
         }
         if (!id) {
@@ -126,7 +126,6 @@ export const deleteShift = (req: Request, res: Response) => {
         
         res.json({
             Ok: true,
-            Message: 'Shift eliminado correctamente'
         });
     });
 }

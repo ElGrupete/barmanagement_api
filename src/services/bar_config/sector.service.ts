@@ -105,7 +105,7 @@ export const deleteSector = (req: Request, res: Response) => {
 
     let id = req.params.id;
 
-    DB.Models.Sector.deleteOne({id}, (err) => {
+    DB.Models.Sector.deleteOne({_id: id}, (err) => {
         if (err) {
             return res
                     .status(500)
@@ -126,7 +126,6 @@ export const deleteSector = (req: Request, res: Response) => {
         
         res.json({
             Ok: true,
-            Message: 'Sector eliminado correctamente'
         });
     });
 }

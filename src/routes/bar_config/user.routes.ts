@@ -14,6 +14,6 @@ router.get('/', [ verifyToken, verifyAdminUser ], service.getUsers);
 router.get('/:id', [ verifyToken, verifyAdminUser ], service.getUserById);
 
 // DELETE //
-router.delete('/', [ verifyToken, verifyAdminUser ], service.deleteUser);
+router.delete('/:id', [ verifyToken, verifyAdminUser ], service.deleteUser);
 
 export default router;
