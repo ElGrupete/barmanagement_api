@@ -42,7 +42,7 @@ export class Menu {
                 type: Boolean
             }
 
-        });
+        }, { toJSON: { virtuals: true }});
 
         schema.virtual('products', {
             ref: 'Product',
