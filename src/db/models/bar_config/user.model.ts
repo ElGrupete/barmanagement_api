@@ -22,8 +22,10 @@ export class User {
                 type: String,
                 required: true,
             },
-            roleId: {
-                type: Schema.Types.ObjectId, ref: 'Role', required: true
+            role: {
+                type: Schema.Types.ObjectId, 
+                ref: 'Role', 
+                required: true
             }
         });
 

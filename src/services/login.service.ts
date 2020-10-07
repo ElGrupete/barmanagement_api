@@ -42,8 +42,7 @@ export const login = (req: Request, res: Response) => {
                 }
 
                 let token = jwt.sign({
-                    user,
-                    role: user.role
+                    user
                 }, SECRET, { expiresIn: TOKEN_EXP });
 
                 return res

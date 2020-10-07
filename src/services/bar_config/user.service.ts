@@ -8,7 +8,7 @@ import { DB } from "../../db/db";
 export const createUser = async (req: Request, res: Response) => {
 
     let user = new DB.Models.User({
-        roleId: req.body.roleId,
+        role: req.body.role,
         userName: req.body.userName,
         password: bcryptjs.hashSync(req.body.password, 10)
     });
@@ -32,7 +32,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const getUsers = (req: Request, res: Response) => {
 
     DB.Models.User.find()
-        .populate('roleId')
+        .populate('role')
         .exec((err, users) => {
             if (err) {
                 return res.status(500).json({
@@ -63,7 +63,7 @@ export const getUserById = (req: Request, res: Response) => {
     let userId = req.params.id;
 
     DB.Models.User.findById(userId)
-        .populate('roleId')
+        .populate('role')
         .exec((err, user) => {
         if (err) {
             return res.status(500).json({
@@ -83,7 +83,7 @@ export const deleteUser = (req: Request, res: Response) => {
 
     let id = req.params.id;
 
-    DB.Models.User.deleteOne({_id: id}, (err) => {
+    DB.Models.User.deleteOne({ _id: id }, (err) => {
         if (err) {
             return res
                     .status(500)

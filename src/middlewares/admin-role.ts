@@ -18,7 +18,7 @@ let verifyAdminRole = (req: Request, res: Response, next: NextFunction) => {
         // The decoded variable is set as type any so that the role property can be accessed //
         let decoded: any = jwt.verify(token, SECRET);
         // If the admin property in the role object is true, call next();
-        if (decoded.role.admin) {
+        if (decoded.user.role.admin) {
             next();
         } else {
             return res
