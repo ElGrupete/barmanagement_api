@@ -30,8 +30,9 @@ export const createUser = async (req: Request, res: Response) => {
 }
 
 export const getUsers = (req: Request, res: Response) => {
+
     DB.Models.User.find()
-        .populate('role')
+        .populate('roleId')
         .exec((err, users) => {
             if (err) {
                 return res.status(500).json({
@@ -50,7 +51,7 @@ export const getUsers = (req: Request, res: Response) => {
             res.status(200).json({
                 Ok: true,
                 Result: {
-                    users, role: users.role
+                    users
                 }
             });
         });
@@ -62,7 +63,7 @@ export const getUserById = (req: Request, res: Response) => {
     let userId = req.params.id;
 
     DB.Models.User.findById(userId)
-        .populate('role')
+        .populate('roleId')
         .exec((err, user) => {
         if (err) {
             return res.status(500).json({
@@ -73,7 +74,7 @@ export const getUserById = (req: Request, res: Response) => {
 
         res.status(200).json({
             Ok: true,
-            Result: {user, role: user != null ? user.role : null}
+            Result: {user}
         });
     });
 }
