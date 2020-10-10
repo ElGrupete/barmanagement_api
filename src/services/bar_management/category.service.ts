@@ -11,10 +11,10 @@ export const createCategory = async (req: Request, res: Response) => {
 
     await category.save((err, category) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 Ok: false,
                 Error: err,
-                Message: 'No se pudo guardar el categoryo'
+                Message: 'No se pudo guardar la categoría'
             });
         }
 

@@ -22,11 +22,12 @@ export class User {
                 type: String,
                 required: true,
             },
-            roleId: {
-                type: String,
+            role: {
+                type: Schema.Types.ObjectId, 
+                ref: 'Role', 
                 required: true
             }
-        }, { toJSON: { virtuals: true }});
+        });
 
         // This deletes the password in the response object //
         schema.methods.toJSON = function () {
@@ -34,13 +35,6 @@ export class User {
             delete obj.password;
             return obj;
         }
-
-        schema.virtual('role', {
-            ref: 'Role',
-            localField: 'roleId',
-            foreignField: '_id',
-            justOne: true
-        })
 
         // This statment adds a plugin to the schema so that the unique fields don't repeat themselfs //
         schema.plugin(mongooseUniqueValidator);

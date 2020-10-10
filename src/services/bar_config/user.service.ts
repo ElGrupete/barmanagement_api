@@ -8,7 +8,7 @@ import { DB } from "../../db/db";
 export const createUser = async (req: Request, res: Response) => {
 
     let user = new DB.Models.User({
-        roleId: req.body.roleId,
+        role: req.body.role,
         userName: req.body.userName,
         password: bcryptjs.hashSync(req.body.password, 10)
     });
@@ -30,28 +30,32 @@ export const createUser = async (req: Request, res: Response) => {
 }
 
 export const getUsers = (req: Request, res: Response) => {
-    DB.Models.User.find({}, (err, users) => {
-        if (err) {
-            return res.status(500).json({
-                Ok: false,
-                Message: err 
-            });
-        }
 
-        if (users.length == 0) {
-            return res.status(200).json({
-                Ok: true,
-                Message: 'No se encontraron resultados',
-            });
-        }
-
-        res.status(200).json({
-            Ok: true,
-            Result: {
-                users
+    DB.Models.User.find()
+        .populate('role')
+        .exec((err, users) => {
+            if (err) {
+                return res.status(500).json({
+                    Ok: false,
+                    Message: err 
+                });
             }
+
+            if (users.length == 0) {
+                return res.status(200).json({
+                    Ok: true,
+                    Message: 'No se encontraron resultados',
+                });
+            }
+    
+            res.status(200).json({
+                Ok: true,
+                Result: {
+                    users
+                }
+            });
         });
-    });
+            
 }
 
 export const getUserById = (req: Request, res: Response) => {
@@ -70,7 +74,7 @@ export const getUserById = (req: Request, res: Response) => {
 
         res.status(200).json({
             Ok: true,
-            Result: {user, role: user != null ? user.role : null}
+            Result: {user}
         });
     });
 }
@@ -79,7 +83,7 @@ export const deleteUser = (req: Request, res: Response) => {
 
     let id = req.params.id;
 
-    DB.Models.User.deleteOne({_id: id}, (err) => {
+    DB.Models.User.deleteOne({ _id: id }, (err) => {
         if (err) {
             return res
                     .status(500)
