@@ -11,6 +11,7 @@ import Combo from './bar_management/combo.routes';
 import Sector from './bar_config/sector.routes';
 import Shift from './bar_config/shift.routes';
 import Waiter from './bar_config/waiter.routes';
+import Table from './bar_config/table.routes';
 
 const router: Router = Router();
 
@@ -25,6 +26,7 @@ router.use('/status', Status);
 router.use('/combo', Combo);
 router.use('/sector', Sector);
 router.use('/shift', Shift);
-router.use('/waiter', Waiter)
+router.use('/waiter', Waiter);
+router.use('/table', Table);
 
 export default router;
