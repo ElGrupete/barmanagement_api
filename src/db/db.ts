@@ -10,6 +10,7 @@ import { Menu, MenuModel } from './models/bar_management/menu.model';
 import { Combo, ComboModel } from './models/bar_management/combo.model';
 import { Sector, SectorModel } from './models/bar_config/sector.model';
 import { Shift, ShiftModel } from './models/bar_config/shift.model';
+import { Waiter, WaiterModel } from './models/bar_config/waiter.model';
 
 // -- Here you should put all the MODELS that the DB is gonna work with -- //
 
@@ -24,6 +25,7 @@ declare interface IModels {
     Combo: ComboModel;
     Sector: SectorModel;
     Shift: ShiftModel;
+    Waiter: WaiterModel;
 }
 
 
@@ -49,7 +51,8 @@ export class DB {
             Status: new Status().model,
             Combo: new Combo().model,
             Sector: new Sector().model,
-            Shift: new Shift().model
+            Shift: new Shift().model,
+            Waiter: new Waiter().model
         }
     }
 
