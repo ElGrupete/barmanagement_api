@@ -22,41 +22,31 @@ export class Menu {
             description: {
                 type: String
             },
-            categoryId: {
-                type: String,
+            category: {
+                type: Schema.Types.ObjectId, 
+                ref: 'Category', 
                 required: true
             },
-            productId: {
-                type: [String],
-            },
+            product: [{
+                type: Schema.Types.ObjectId, 
+                ref: 'Product'
+            }],
             notes: {
                 type: String
             },
             image: {
                 type: String
             },
-            statusId: {
-                type: String
-            },
+            status: [{
+                type: Schema.Types.ObjectId, 
+                ref: 'Status'
+            }],
             printed: {
                 type: Boolean
             }
 
-        }, { toJSON: { virtuals: true }});
-
-        schema.virtual('products', {
-            ref: 'Product',
-            localField: 'productId',
-            foreignField: '_id'
-        })
-
-        schema.virtual('status', {
-            ref: 'Status',
-            localField: 'statusId',
-            foreignField: '_id',
-            justOne: true
-        })
-        
+        });
+   
         // This statment adds a plugin to the schema so that the unique fields don't repeat themselfs //
         schema.plugin(mongooseUniqueValidator);
 

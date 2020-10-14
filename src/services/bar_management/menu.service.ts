@@ -7,11 +7,12 @@ export const createMenu = async (req: Request, res: Response) => {
     let menu = new DB.Models.Menu({
         name: req.body.name,
         description: req.body.description,
-        categoryId: req.body.categoryId,
+        category: req.body.category,
         notes: req.body.notes,
         image: req.body.image,
-        statusId: req.body.statusId,
-        printed: req.body.printed
+        status: req.body.status,
+        printed: req.body.printed,
+        product: req.body.product
     });
 
     await menu.save((err, menu) => {
@@ -23,48 +24,22 @@ export const createMenu = async (req: Request, res: Response) => {
             });
         }
 
+        res.json({
+            Ok: true,
+            Result: { menu }
+        });
     });
-    
-    let updated = DB.Models.Menu.updateOne({ _id: menu._id }, 
-        { $addToSet: { productId: { $each: req.body.productId } }}, 
-        { safe: true, upsert: true },
-        (err) => {
-          if (err) {
-              return res.status(500).json({
-                  Ok: false,
-                  Message: err
-              });
-          }
-
-          res.json({
-              Ok: true,
-              Result: { menu }
-          });
-
-        
-    });
-    // DB.Models.Menu.update({ _id: menu._id }, 
-    //                       { $push: { productId: { $each: req.body.productId } }}, 
-    //                       { upsert: true, new: true }, (err, menu) => {
-    //                         if (err) {
-    //                             return res.status(500).json({
-    //                                 Ok: false,
-    //                                 Message: err
-    //                             });
-    //                         }
-
-    //                         res.json({
-    //                             Ok: true,
-    //                             Result: { menu }
-    //                         });
-    // });
 
 }
 
 export const getAllMenus = (req: Request, res: Response) => {
 
     DB.Models.Menu
-             .find({}, (err, menus) => {
+             .find({})
+             .populate('category')
+             .populate('product')
+             .populate('status')
+             .exec((err, menus) => {
                 if (err) {
                     return res.status(500).json({
                         Ok: false,
@@ -92,7 +67,7 @@ export const getMenuById = (req: Request, res: Response) => {
     let id = req.params.id;
 
     DB.Models.Menu
-             .findById(id, (err, menu) => {
+             .findById({ _id: id }, (err, menu) => {
                 if (err) {
                     return res.status(500).json({
                         Ok: false,
