@@ -37,7 +37,7 @@ export const getAllCategories = (req: Request, res: Response) => {
                 }
         
                 if (categories.length == 0) {
-                    return res.status(200).json({
+                    return res.status(204).json({
                         Ok: true,
                         Message: 'No se encontraron resultados',
                     });
