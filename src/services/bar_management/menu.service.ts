@@ -8,11 +8,12 @@ export const createMenu = async (req: Request, res: Response) => {
         name: req.body.name,
         description: req.body.description,
         category: req.body.category,
-        notes: req.body.notes,
+        // notes: req.body.notes,
         image: req.body.image,
         status: req.body.status,
         printed: req.body.printed,
-        product: req.body.product
+        product: req.body.product,
+        price: req.body.price
     });
 
     await menu.save((err, menu) => {

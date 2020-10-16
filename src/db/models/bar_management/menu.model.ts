@@ -31,9 +31,9 @@ export class Menu {
                 type: Schema.Types.ObjectId, 
                 ref: 'Product'
             }],
-            notes: {
-                type: String
-            },
+            // notes: {
+            //     type: String
+            // },
             image: {
                 type: String
             },
@@ -43,6 +43,10 @@ export class Menu {
             }],
             printed: {
                 type: Boolean
+            },
+            price: {
+                type: Number,
+                required: true
             }
 
         });
