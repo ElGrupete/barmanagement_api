@@ -8,7 +8,9 @@ export const createMenu = async (req: Request, res: Response) => {
         name: req.body.name,
         description: req.body.description,
         category: req.body.category,
-        // notes: req.body.notes,
+        hasSideDishes: req.body.hasSideDishes,
+        sideDishes: req.body.sideDishes,
+        notes: req.body.notes,
         image: req.body.image,
         status: req.body.status,
         printed: req.body.printed,
@@ -40,6 +42,10 @@ export const getAllMenus = (req: Request, res: Response) => {
              .populate('category')
              .populate('product')
              .populate('status')
+             .populate({
+                path: 'sideDishes',
+                populate: { path: "product"}
+             })
              .exec((err, menus) => {
                 if (err) {
                     return res.status(500).json({
@@ -65,23 +71,29 @@ export const getAllMenus = (req: Request, res: Response) => {
 
 export const getMenuById = (req: Request, res: Response) => {
 
-    let id = req.params.id;
+    let menuId = req.params.id;
 
-    DB.Models.Menu
-             .findById({ _id: id }, (err, menu) => {
-                if (err) {
-                    return res.status(500).json({
-                        Ok: false,
-                        Message: 'Menu no encontrado' 
-                    });
-                }
-        
-                res.status(200).json({
-                    Ok: true,
-                    Result: { menu }
-                });
+    DB.Models.Menu.findById(menuId)
+        .populate('category')
+        .populate('product')
+        .populate('status')
+        .populate({
+            path: 'sideDishes',
+            populate: { path: "product"}
+        })
+        .exec((err, menu) => {
+        if (err) {
+            return res.status(500).json({
+                Ok: false,
+                Message: 'Mozo no encontrado' 
+            });
+        }
 
-             });
+        res.status(200).json({
+            Ok: true,
+            Result: {menu}
+        });
+    });
 }
 
 export const updateMenu = (req: Request, res: Response) => {

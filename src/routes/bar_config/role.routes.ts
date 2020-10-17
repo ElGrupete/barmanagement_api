@@ -1,20 +1,22 @@
 import * as service from '../../services/bar_config/role.service';
 import express = require("express");
+import verifyToken from "../../middlewares/authorization";
+import verifyAdminUser from '../../middlewares/admin-role';
 const router = express.Router();
 
 // GET ALL //
-router.get('/', service.getRoles);
+router.get('/', [ verifyToken, verifyAdminUser ], service.getRoles);
 
 // GET ONE //
-router.get('/:id', service.getRoleById);
+router.get('/:id', [ verifyToken, verifyAdminUser ], service.getRoleById);
 
 // POST //
-router.post('/', service.createRole);
+router.post('/', [ verifyToken, verifyAdminUser ], service.createRole);
 
 // PUT //
-router.put('/:id', service.updateRole);
+router.put('/:id', [ verifyToken, verifyAdminUser ], service.updateRole);
 
 // DELETE //
-router.delete('/:id', service.deleteRole);
+router.delete('/:id', [ verifyToken, verifyAdminUser ], service.deleteRole);
 
 export default router;

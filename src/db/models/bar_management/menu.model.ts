@@ -31,9 +31,17 @@ export class Menu {
                 type: Schema.Types.ObjectId, 
                 ref: 'Product'
             }],
-            // notes: {
-            //     type: String
-            // },
+            hasSideDishes: {
+                type: Boolean,
+                required: true
+            },
+            sideDishes: {
+                type: Schema.Types.ObjectId,
+                ref: 'Menu'
+            },
+            notes: {
+                type: String
+            },
             image: {
                 type: String
             },
