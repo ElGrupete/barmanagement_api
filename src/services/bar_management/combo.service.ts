@@ -7,9 +7,10 @@ export const createCombo = async (req: Request, res: Response) => {
     let combo = new DB.Models.Combo({
         name: req.body.name,
         description: req.body.description,
-        menuId: req.body.menuId,
+        menu: req.body.menu,
         expirationDate: req.body.expirationDate,
-        image: req.body.image
+        image: req.body.image,
+        price: req.body.price
     });
 
     await combo.save((err, combo) => {
@@ -31,7 +32,12 @@ export const createCombo = async (req: Request, res: Response) => {
 export const getAllCombos = (req: Request, res: Response) => {
 
     DB.Models.Combo
-             .find({}, (err, combos) => {
+             .find({})
+             .populate({
+                 path: "menu",
+                 populate: { path: "product" }
+             })
+             .exec((err, combos) => {
                 if (err) {
                     return res.status(500).json({
                         Ok: false,
@@ -56,23 +62,26 @@ export const getAllCombos = (req: Request, res: Response) => {
 
 export const getComboById = (req: Request, res: Response) => {
 
-    let id = req.params.id;
+    let comboId = req.params.id;
 
-    DB.Models.Combo
-             .findById(id, (err, combo) => {
-                if (err) {
-                    return res.status(500).json({
-                        Ok: false,
-                        Message: 'Comboo no encontrado' 
-                    });
-                }
-        
-                res.status(200).json({
-                    Ok: true,
-                    Result: { combo }
-                });
+    DB.Models.Combo.findById(comboId)
+        .populate({
+            path: "menu",
+            populate: { path: "product" }
+        })
+        .exec((err, combo) => {
+        if (err) {
+            return res.status(500).json({
+                Ok: false,
+                Message: 'Mozo no encontrado' 
+            });
+        }
 
-             });
+        res.status(200).json({
+            Ok: true,
+            Result: {combo}
+        });
+    });
 }
 
 export const updateCombo = (req: Request, res: Response) => {
