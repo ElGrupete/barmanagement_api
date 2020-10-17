@@ -5,8 +5,8 @@ import verifyAdminRole from '../../middlewares/admin-role';
 const router = express.Router();
 
 router.post('/', [verifyToken, verifyAdminRole], service.createCategory);
-router.get('/', [verifyToken, verifyAdminRole], service.getAllCategories);
-router.get('/:id', [verifyToken, verifyAdminRole], service.getCategoryById);
+router.get('/', [verifyToken], service.getAllCategories);
+router.get('/:id', [verifyToken], service.getCategoryById);
 router.put('/:id', [verifyToken, verifyAdminRole], service.updateCategory);
 router.delete('/:id', [verifyToken, verifyAdminRole], service.deleteCategory);
 
