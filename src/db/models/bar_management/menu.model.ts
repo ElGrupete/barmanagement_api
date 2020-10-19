@@ -45,7 +45,7 @@ export class Menu {
                 type: Boolean
             },
             price: {
-                type: Number,
+                type: Schema.Types.Decimal128,
                 required: true
             }
 
