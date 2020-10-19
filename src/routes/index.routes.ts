@@ -12,6 +12,9 @@ import Sector from './bar_config/sector.routes';
 import Shift from './bar_config/shift.routes';
 import Waiter from './bar_config/waiter.routes';
 import Table from './bar_config/table.routes';
+import Order from './bar_management/order.routes';
+import Notification from './bar_management/notification.routes';
+
 
 const router: Router = Router();
 
@@ -28,5 +31,7 @@ router.use('/sector', Sector);
 router.use('/shift', Shift);
 router.use('/waiter', Waiter);
 router.use('/table', Table);
+router.use('/order', Order);
+router.use('/notification', Notification);
 
 export default router;
