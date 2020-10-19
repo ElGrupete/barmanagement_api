@@ -5,8 +5,8 @@ import verifyAdminRole from '../../middlewares/admin-role';
 const router = express.Router();
 
 router.post('/', [verifyToken, verifyAdminRole], service.createCombo);
-router.get('/', [verifyToken, verifyAdminRole], service.getAllCombos);
-router.get('/:id', [verifyToken, verifyAdminRole], service.getComboById);
+router.get('/', [verifyToken], service.getAllCombos);
+router.get('/:id', [verifyToken], service.getComboById);
 router.put('/:id', [verifyToken, verifyAdminRole], service.updateCombo);
 router.delete('/:id', [verifyToken, verifyAdminRole], service.deleteCombo);
 
