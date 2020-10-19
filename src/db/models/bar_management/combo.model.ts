@@ -22,23 +22,22 @@ export class Combo {
             description: {
                 type: String
             },
-            menuId: {
-                type: String,
+            menu: [{
+                type: Schema.Types.ObjectId,
+                ref: "Menu",
                 required: true
-            },
+            }],
             expirationDate: {
-                type: Date
+                type: String
             },
             image: {
-                type: String
+                type: String //lo dejo como string, no tengo ni puta idea de como pasar un date desde json, suerte!
+            },
+            price: {
+                type: Number,
+                required: true
             }
         });
-
-        schema.virtual('menus', {
-            ref: 'Menu',
-            localField: 'menuId',
-            foreignField: '_id'
-        })
         
         // This statment adds a plugin to the schema so that the unique fields don't repeat themselfs //
         schema.plugin(mongooseUniqueValidator);
