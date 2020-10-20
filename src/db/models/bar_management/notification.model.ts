@@ -2,7 +2,6 @@ import { Schema, model } from 'mongoose';
 import { Model } from 'mongoose';
 import { INotification } from '../../interfaces/bar_management/notification.interface';
 import mongooseUniqueValidator from 'mongoose-unique-validator';
-import { timeStamp } from 'console';
 
 export interface NotificationModel extends Model<INotification> {};
 
@@ -24,11 +23,11 @@ export class Notification {
                 ref: 'User'
             },
             subject: {
-                string: String,
+                type: String,
                 required: true
             },
             datetime: {
-                type: timeStamp
+                type: Date
             },
             readed: {
                 type: Boolean,

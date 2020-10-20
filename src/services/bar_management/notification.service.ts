@@ -8,7 +8,8 @@ export const createNotification = async (req: Request, res: Response) => {
         sender: req.body.sender,
         receiver: req.body.receiver,
         subject: req.body.subject,
-        readed: req.body.readed
+        readed: req.body.readed,
+        datetime: new Date()
     });
 
     await notification.save((err, notification) => {
