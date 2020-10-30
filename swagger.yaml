@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Bar Autogestionado
+  description: Este proyecto tiene como fin gestionar un flujo de trabajo de un bar estándar
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/api/v1'
+    description: Servidor local
+  # - url: http://staging-api.example.com
+  #   description: Optional server description, e.g. Internal staging server for testing
+securityDefinitions:
+  Authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+paths:
+  /role:
+    get:
+      summary: Retorna un listado de roles.
+      # description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          # description: Un JSON
+          content:
+            application/json:
+              schema: 
+                # type: array
+                # items: 
+                #   type: string

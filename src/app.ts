@@ -3,6 +3,8 @@ import * as bodyParser from "body-parser";
 import routes from "./routes/index.routes";
 import cors from "cors";
 
+import { BASE_URL } from './config/config';
+
 // -- This Class is the Express APP -- //
 // -- This is used throughout the application -- //
 
@@ -27,7 +29,7 @@ class App {
         this.app.use(bodyParser.urlencoded({extended: false}));
 
     // -- Add all the existing routes -- //
-        this.app.use("/api/v1", routes);
+        this.app.use(BASE_URL, routes);
     }
 }
 export default new App().app;

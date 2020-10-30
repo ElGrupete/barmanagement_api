@@ -15,9 +15,13 @@ import Table from './bar_config/table.routes';
 import Order from './bar_management/order.routes';
 import Notification from './bar_management/notification.routes';
 
+/** Swagger configuration */
+import * as swaggerUi from "swagger-ui-express";
+import { swaggerDoc } from '../config/swagger';
 
 const router: Router = Router();
 
+router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 router.use('/dummy', Dummy);
 router.use('/role', Role);
 router.use('/user', User);
