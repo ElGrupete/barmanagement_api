@@ -13,6 +13,10 @@ export class Table {
      */
     constructor() {
         const schema = new Schema({
+            number: {
+                type: Number,
+                required: true
+            },
             sector: {
                 type: Schema.Types.ObjectId, 
                 ref: 'Sector', 
@@ -21,7 +25,7 @@ export class Table {
             user: {
                 type: Schema.Types.ObjectId, 
                 ref: 'User', 
-                required: true
+                // required: true
             },
             available: {
                 type: Boolean,

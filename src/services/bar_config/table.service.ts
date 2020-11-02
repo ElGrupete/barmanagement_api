@@ -8,6 +8,7 @@ import { DB } from "../../db/db";
 export const createTable = async (req: Request, res: Response) => {
 
     let table = new DB.Models.Table({
+        number: req.body.number,
         sector: req.body.sector,
         user: req.body.user,
         available: req.body.available,
