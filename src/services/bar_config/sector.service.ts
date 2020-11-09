@@ -3,28 +3,23 @@ import { Request, Response } from 'express';
 
 
 export const getSectors = (req: Request, res: Response) => {
-    DB.Models.Sector.find({}, (err, sectors) => {
-        if (err) {
-            return res.status(500).json({
-                Ok: false,
-                Message: err 
-            });
-        }
+    DB.Models.Sector.find({})
+                    .populate('tables')
+                    .exec((err, sectors) => {
+                        if (err) {
+                            return res.status(500).json({
+                                Ok: false,
+                                Message: err 
+                            });
+                        }
 
-        if (sectors.length == 0) {
-            return res.status(200).json({
-                Ok: true,
-                Message: 'No se encontraron resultados',
-            });
-        }
-
-        res.status(200).json({
-            Ok: true,
-            Result: {
-                sectors
-            }
-        });
-    });
+                        res.status(200).json({
+                            Ok: true,
+                            Result: {
+                                sectors
+                            }
+                        });
+                    });
 }
 
 export const getSectorById = (req: Request, res: Response) => {
@@ -51,7 +46,8 @@ export const createSector = (req: Request, res: Response) => {
 
     let sector = new DB.Models.Sector({
         name: req.body.name,
-        description: req.body.description
+        description: req.body.description,
+        tables: req.body.tables
     });
 
     sector.save( (err, sector) => {

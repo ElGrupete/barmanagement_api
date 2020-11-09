@@ -1,6 +1,5 @@
 import express = require("express");
 import { Request, Response } from "express";
-import * as bcryptjs from 'bcryptjs';
 import { DB } from "../../db/db";
 
 
@@ -35,19 +34,13 @@ export const createTable = async (req: Request, res: Response) => {
 export const getTables = (req: Request, res: Response) => {
 
     DB.Models.Table.find()
-        .populate('sector').populate('user')
+        .populate('sector')
+        .populate('user')
         .exec((err, tables) => {
             if (err) {
                 return res.status(500).json({
                     Ok: false,
                     Message: err 
-                });
-            }
-
-            if (tables.length == 0) {
-                return res.status(200).json({
-                    Ok: true,
-                    Message: 'No se encontraron resultados',
                 });
             }
     

@@ -15,17 +15,17 @@ export class Table {
         const schema = new Schema({
             number: {
                 type: Number,
-                required: true
+                required: true,
+                unique: true
             },
             sector: {
                 type: Schema.Types.ObjectId, 
                 ref: 'Sector', 
-                required: true
+                // required: true
             },
             user: {
                 type: Schema.Types.ObjectId, 
                 ref: 'User', 
-                // required: true
             },
             available: {
                 type: Boolean,

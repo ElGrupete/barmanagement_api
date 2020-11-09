@@ -20,6 +20,12 @@ export class Sector {
             },
             description: {
                 type: String
+            },
+            tables: {
+                type: [{
+                    type: Schema.Types.ObjectId, 
+                    ref: 'Table'
+                }],
             }
         });
 
