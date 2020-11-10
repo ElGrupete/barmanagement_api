@@ -39,9 +39,6 @@ export class Menu {
                 type: Schema.Types.ObjectId,
                 ref: 'Menu'
             },
-            notes: {
-                type: String
-            },
             image: {
                 type: String
             },

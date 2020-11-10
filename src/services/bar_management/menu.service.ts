@@ -10,7 +10,6 @@ export const createMenu = async (req: Request, res: Response) => {
         category: req.body.category,
         hasSideDishes: req.body.hasSideDishes,
         sideDishes: req.body.sideDishes,
-        notes: req.body.notes,
         image: req.body.image,
         status: req.body.status,
         printed: req.body.printed,
@@ -37,9 +36,11 @@ export const createMenu = async (req: Request, res: Response) => {
 
 export const getAllMenus = (req: Request, res: Response) => {
 
+    let categoryId = req.query.categoryId != null ? req.query.categoryId : null;
+
     DB.Models.Menu
              .find({})
-             .populate('category')
+             .populate({ path: 'category', match: { _id: categoryId } })
              .populate('product')
              .populate('status')
              .populate({
@@ -53,17 +54,14 @@ export const getAllMenus = (req: Request, res: Response) => {
                         Message: err 
                     });
                 }
-        
-                if (menus.length == 0) {
-                    return res.status(200).json({
-                        Ok: true,
-                        Message: 'No se encontraron resultados',
-                    });
-                }
-        
+                /** This is necessary because mongoose 
+                 * does return the entire document with
+                 *  a null field if the match does not apply
+                 **/
+                let filteredMenus = (menus).filter(x => x.category != null);
                 res.status(200).json({
                     Ok: true,
-                    Result: { menus }
+                    Result: { filteredMenus }
                 });
              });
 

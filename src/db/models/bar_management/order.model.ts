@@ -24,7 +24,8 @@ export class Order {
             }],
             table: {
                 type: Schema.Types.ObjectId,
-                ref: 'Table'
+                ref: 'Table',
+                required: true
             },
             waiter: {
                 type: Schema.Types.ObjectId,
@@ -42,6 +43,9 @@ export class Order {
             }],
             paid: {
                 type: Boolean
+            },
+            notes: {
+                type: String
             }
         });
    

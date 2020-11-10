@@ -7,7 +7,6 @@ export declare interface IMenu extends Document {
     product: string[]; /** String array that represents the objectIds of PRODUCTs */
     hasSideDishes: boolean;
     sideDishes: string;
-    notes: string;
     image: string;
     status: string; /** String that represents the objectId of a STATUS */
     printed: boolean;

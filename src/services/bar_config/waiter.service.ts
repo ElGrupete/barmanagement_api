@@ -31,6 +31,32 @@ export const createWaiter = async (req: Request, res: Response) => {
     });
 }
 
+export const createWaiterFromUserCreation = async (req: Request, res: Response, userId?: string) => {
+
+    let waiter = new DB.Models.Waiter({
+        sector: req.body.sector,
+        shift: req.body.shift,
+        user: userId != undefined ? userId : req.body.user,
+        name: req.body.name,
+        lastname: req.body.lastname
+    });
+
+    await waiter.save((err, waiter) => {
+        if (err) {
+            return res.status(400).json({
+                Ok: false,
+                Error: err,
+                Message: 'No se pudo guardar el camarero'
+            });
+        }
+
+        res.status(200).json({
+            Ok: true,
+            Result: { waiter }
+        });
+    });
+}
+
 export const getWaiters = (req: Request, res: Response) => {
 
     DB.Models.Waiter.find()

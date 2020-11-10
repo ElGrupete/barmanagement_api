@@ -33,7 +33,7 @@ export class Table {
             },
             people: {
                 type: Number,
-                default: 0
+                default: 2
             },
             booked: {
                 type: Boolean

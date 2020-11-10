@@ -1,5 +1,6 @@
 import * as service from '../../services/bar_config/waiter.service';
 import express = require("express");
+import * as _express from 'express';
 import verifyToken from "../../middlewares/authorization";
 import verifyAdminWaiter from '../../middlewares/admin-role';
 const router = express.Router();

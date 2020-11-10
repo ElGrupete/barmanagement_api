@@ -2,6 +2,8 @@ import express = require("express");
 import { Request, Response } from "express";
 import * as bcryptjs from 'bcryptjs';
 import { DB } from "../../db/db";
+import * as waiterMethods from '../bar_config/waiter.service';
+import * as tableMethods from '../bar_config/table.service';
 
 
 // POST //
@@ -12,7 +14,7 @@ export const createUser = async (req: Request, res: Response) => {
         userName: req.body.userName,
         password: bcryptjs.hashSync(req.body.password, 10)
     });
-
+    
     await user.save((err, user) => {
         if (err) {
             return res.status(400).json({
@@ -21,6 +23,27 @@ export const createUser = async (req: Request, res: Response) => {
                 Message: 'No se pudo guardar el usuario'
             });
         }
+
+        DB.Models.Role.findById({ _id: req.body.role })
+                      .exec(async (err, role) => {
+
+                        if (err) {
+                            return res.status(404).json({
+                                Ok: false,
+                                Error: err,
+                                Message: 'No se encontró el rol'
+                            });
+                        }
+
+                        if (role != null && role.name == 'Mesa') {
+                            await tableMethods.createTableFromUserCreation(req, res, user._id);
+                        }
+
+                        if (role != null && role.name == 'Camarero') {
+                            await waiterMethods.createWaiterFromUserCreation(req, res, user._id);
+                        }
+                    });
+
 
         res.status(200).json({
             Ok: true,

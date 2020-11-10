@@ -9,4 +9,5 @@ export declare interface IOrder extends Document {
     cutlery: number;
     totalCost: number;
     paid: boolean;
+    notes: string;
 }

@@ -31,6 +31,33 @@ export const createTable = async (req: Request, res: Response) => {
     });
 }
 
+export const createTableFromUserCreation = async (req: Request, res: Response, userId?: string) => {
+
+    let table = new DB.Models.Table({
+        number: req.body.number,
+        sector: req.body.sector,
+        user: userId != undefined ? userId : req.body.user,
+        available: req.body.available,
+        people: req.body.people,
+        booked: req.body.booked
+    });
+
+    await table.save((err, table) => {
+        if (err) {
+            return res.status(400).json({
+                Ok: false,
+                Error: err,
+                Message: 'No se pudo guardar el mesa'
+            });
+        }
+
+        res.status(200).json({
+            Ok: true,
+            Result: { table }
+        });
+    });
+}
+
 export const getTables = (req: Request, res: Response) => {
 
     DB.Models.Table.find()
