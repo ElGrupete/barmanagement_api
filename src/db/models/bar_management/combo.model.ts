@@ -31,7 +31,7 @@ export class Combo {
                 type: String
             },
             image: {
-                type: String //lo dejo como string, no tengo ni puta idea de como pasar un date desde json, suerte!
+                type: String
             },
             price: {
                 type: Number,
