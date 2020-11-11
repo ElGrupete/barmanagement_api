@@ -5,7 +5,7 @@ import verifyAdminRole from '../../middlewares/admin-role';
 const router = express.Router();
 
 router.post('/', [verifyToken], service.createOrder);
-router.get('/', [verifyToken], service.getAllOrders);
+router.get('/tableId/:id', [verifyToken], service.getOrderByTableId);
 router.get('/:id', [verifyToken], service.getOrderById);
 router.put('/:id', [verifyToken], service.updateOrder);
 router.delete('/:id', [verifyToken], service.deleteOrder);

@@ -8,10 +8,10 @@ const router = express.Router();
 router.post('/', [ verifyToken, verifyAdminTable ], service.createTable);
 
 // GET ALL //
-router.get('/', [ verifyToken, verifyAdminTable ], service.getTables);
+router.get('/', [ verifyToken ], service.getTables);
 
 // GET ONE //
-router.get('/:id', [ verifyToken, verifyAdminTable ], service.getTableById);
+router.get('/:id', [ verifyToken ], service.getTableById);
 
 // UPDATE //
 router.put('/:id', [ verifyToken, verifyAdminTable ], service.updateTable);

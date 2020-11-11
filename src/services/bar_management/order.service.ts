@@ -36,6 +36,39 @@ export const createOrder = async (req: Request, res: Response) => {
 export const getAllOrders = (req: Request, res: Response) => {
 
     let tableId = req.query.tableId != null ? req.query.tableId : null;
+    let statusId = req.query.statusId != null ? req.query.statusId : null;
+
+    DB.Models.Order
+             .find({})
+             .populate('menu')
+             .populate('combo')
+             .populate({ path: 'table', match: { _id: tableId } })
+             .populate('waiter')
+             .populate({ path: 'status', match: { _id: statusId } })
+             .exec((err, allOrders) => {
+                if (err) {
+                    return res.status(500).json({
+                        Ok: false,
+                        Message: err 
+                    });
+                }
+                /** This is necessary because mongoose 
+                 * does return the entire document with
+                 *  a null field if the match does not apply
+                 **/
+                let orders = (allOrders).filter(x => x.table != null && x.status != null);
+        
+                res.status(200).json({
+                    Ok: true,
+                    Result: { orders }
+                });
+             });
+
+}
+
+export const getOrderByTableId = (req: Request, res: Response) => {
+
+    let tableId = req.params.id;
 
     DB.Models.Order
              .find({})
@@ -64,6 +97,7 @@ export const getAllOrders = (req: Request, res: Response) => {
              });
 
 }
+
 
 export const getOrderById = (req: Request, res: Response) => {
 
